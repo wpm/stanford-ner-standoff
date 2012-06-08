@@ -17,17 +17,18 @@ import java.util.List;
  * those offsets refer to.
  */
 public class StandoffNamedEntityRecognizer {
-    public static void main(String[] args) throws ClassNotFoundException, IOException {
-       String model = args[0];
-       String filename = args[1];
-       String text = FileUtils.readFileToString(new File(filename));
-       CRFClassifier stanfordNER = CRFClassifier.getClassifier(model);
-       @SuppressWarnings({"unchecked"})
-       List<Triple<String, Integer, Integer>> annotations = stanfordNER.classifyToCharacterOffsets(text);
-       for (Triple<String, Integer, Integer> annotation: annotations) {
-          int beginIndex = annotation.second();
-          int endIndex = annotation.third();
-          System.out.println(annotation + " " + text.substring(beginIndex, endIndex));
-       }
-    }
+
+   public static void main(String[] args) throws ClassNotFoundException, IOException {
+      String model = args[0];
+      String filename = args[1];
+      String text = FileUtils.readFileToString(new File(filename));
+      CRFClassifier stanfordNER = CRFClassifier.getClassifier(model);
+      @SuppressWarnings({"unchecked"})
+      List<Triple<String, Integer, Integer>> annotations = stanfordNER.classifyToCharacterOffsets(text);
+      for (Triple<String, Integer, Integer> annotation: annotations) {
+         int beginIndex = annotation.second();
+         int endIndex = annotation.third();
+         System.out.println(annotation + " " + text.substring(beginIndex, endIndex));
+      }
+   }
 }
