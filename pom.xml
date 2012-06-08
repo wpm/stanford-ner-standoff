@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>StanfordNEROffset</groupId>
+    <artifactId>StanfordNEROffset</artifactId>
+    <version>1.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <!--Make the JAR executable-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                  <archive>
+                    <manifest>
+                      <addClasspath>true</addClasspath>
+                      <mainClass>wpmcn.StandoffNamedEntityRecognizer</mainClass>
+                    </manifest>
+                  </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!--Make program execution as a Maven goal.-->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>wpmcn.StandoffNamedEntityRecognizer</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <packaging>jar</packaging>
+
+    <name>StanfordNEROffset</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+    	    <groupId>edu.stanford.nlp</groupId>
+	        <artifactId>stanford-corenlp</artifactId>
+	        <version>1.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+    </dependencies>
+</project>
