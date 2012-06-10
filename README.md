@@ -17,13 +17,13 @@ accommodate the recognizer.
 If _file.txt_ contains the following text
 
 	Thomas Pynchon was born in Glen Cove, New York.
-	He served in the U.S. Navy.
+	He served in the United States Navy.
 
 the program will return
 
 	(PERSON,0,14) Thomas Pynchon
 	(LOCATION,27,36) Glen Cove
 	(LOCATION,38,46) New York
-	(ORGANIZATION,65,74) U.S. Navy
+	(LOCATION,65,83) United States Navy
 
 The numbers are span begin and end offsets into the text.
