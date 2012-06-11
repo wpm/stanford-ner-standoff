@@ -17,13 +17,18 @@ accommodate the recognizer.
 If _file.txt_ contains the following text
 
 	Thomas Pynchon was born in Glen Cove, New York.
-	He served in the United States Navy.
+	He attended Cornell University.
 
 the program will return
 
 	(PERSON,0,14) Thomas Pynchon
 	(LOCATION,27,36) Glen Cove
 	(LOCATION,38,46) New York
-	(LOCATION,65,83) United States Navy
+	(ORGANIZATION,60,78) Cornell University
 
 The numbers are span begin and end offsets into the text.
+
+If the program is run with the *--custom-tokenization* switch, it will use a simple regular
+expression based tokenization scheme that treats each line of text as a separate sentence.
+This is inferior to the tokenization scheme built into the Stanford tools, but serves as an
+example of how to use the recognizer with custom tokenization schemes.

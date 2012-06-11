@@ -2,6 +2,7 @@ package wpmcn;
 
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.util.Triple;
+import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -18,14 +19,20 @@ import java.util.List;
  * those offsets refer to.
  */
 public class StandoffNamedEntityRecognizer {
-   public static void main(String[] args) throws ClassNotFoundException, IOException {
+   public static void main(String[] args) throws ClassNotFoundException, IOException, ParseException {
+      Options options = new Options();
+      options.addOption("c", "custom-tokenization", false, "Use custom tokenization");
+
+      CommandLineParser parser = new PosixParser();
+      CommandLine cmd = parser.parse(options, args);
+      args = cmd.getArgs();
+
       String model = args[0];
       String filename = args[1];
       String text = FileUtils.readFileToString(new File(filename));
 
-      boolean defaultTokenization = false;
-      CRFClassifier annotator;
-      annotator = defaultTokenization ? CRFClassifier.getClassifier(model) : new CustomCRFClassifier(model);
+      CRFClassifier annotator = cmd.hasOption("c") ?
+            new CustomCRFClassifier(model) : CRFClassifier.getClassifier(model);
 
       @SuppressWarnings({"unchecked"})
       List<Triple<String, Integer, Integer>> annotations = annotator.classifyToCharacterOffsets(text);
